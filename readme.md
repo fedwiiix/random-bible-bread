@@ -1,3 +1,3 @@
 # Random bible bread
 
-![](./captures.png)
+![](./capture.png)
