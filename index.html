@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link
+			rel="shortcut icon"
+			href="https://sjtm.fr/menu/img/icon.png"
+			type="image/x-icon"
+		/>
+		<link type="text/css" rel="stylesheet" href="./style.css" />
+	</head>
+	<body>
+		<div id="container">
+			<button id="button" onclick="getRandomBibleVerse()"></button>
+			<p id="text"></p>
+			<p id="ref"></p>
+		</div>
+	</body>
+</html>
+
+<script>
+  if((new URL(window.location)).searchParams.get("hidebutton") !== null){
+    document.getElementById('button').style.visibility = 'hidden';
+  }
+  
+	var data;
+
+	function getRandomBibleVerse() {
+		rand = getRandomInt(data.length);
+		document.getElementById('text').innerHTML = data[rand].text;
+		document.getElementById('ref').innerHTML = data[rand].ref;
+		document.getElementById('container').style.visibility = 'visible';
+	}
+
+	function getRandomInt(max) {
+		return Math.floor(Math.random() * Math.floor(max));
+	}
+
+	function readTextFile(file, callback) {
+		var rawFile = new XMLHttpRequest();
+		rawFile.overrideMimeType('application/json');
+		rawFile.open('GET', file, true);
+		rawFile.onreadystatechange = function () {
+			if (rawFile.readyState === 4 && rawFile.status === 200) {
+				callback(rawFile.responseText);
+			}
+		};
+		rawFile.send(null);
+	}
+
+	readTextFile('./bibleVerse.json', function (text) {
+		data = JSON.parse(text);
+		console.log(data);
+		getRandomBibleVerse();
+	});
+</script>
