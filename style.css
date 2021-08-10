@@ -35,6 +35,7 @@ body {
 	border-radius: 3px;
 	visibility: hidden;
 	animation: zoom-in 1s ease-out;
+	box-sizing: border-box;
 }
 
 #text {
