@@ -22,8 +22,8 @@
 </html>
 
 <script>
-  if((new URL(window.location)).searchParams.get("hidebutton") !== null){
-    document.getElementById('button').style.visibility = 'hidden';
+  if((new URL(window.location)).searchParams.get("button") === null){
+    document.getElementById('button').style.display = 'none';
   }
   
 	var data;
@@ -53,7 +53,6 @@
 
 	readTextFile('./bibleVerse.json', function (text) {
 		data = JSON.parse(text);
-		console.log(data);
 		getRandomBibleVerse();
 	});
 </script>
